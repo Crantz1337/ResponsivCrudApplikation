@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="form-container">
+        <form [formGroup]="quotesForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="quote">Quote:</label>
+                <input type="text" id="quote" formControlName="quote" class="form-control form-control-sm" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-sm submit-button">
+                <i class="fa fa-paper-plane"></i> Submit
+            </button>
+        </form> 
+
+        <button routerLink='/home' type="button" class="btn btn-primary btn-sm return-button">←</button>
+
+        <div class="quotes-list">
+            <ul class="list-unstyled">
+                <li *ngFor="let quote of quotes">
+                    <p> 
+                        {{quote}} 
+                        <button class="btn btn-danger btn-sm delete-button" (click)="deleteQuote(quote)">
+                            <i class="fa fa-trash"></i> Delete
+                        </button> 
+                    </p>      
+                </li>
+            </ul>
+        </div>
+        
+        <div *ngIf="errorMessage" class="alert alert-danger error-message">
+            <i class="fa fa-exclamation-circle"></i> {{ errorMessage }}
+        </div>
+    </div>
+</div>

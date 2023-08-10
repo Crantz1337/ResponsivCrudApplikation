@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+
+.form-container {
+  width: 25%; 
+}
+
+.submit-button,
+.return-button {
+  margin-top: 10px;
+}
+
+
+.quotes-list {
+  height: 200px;
+  overflow-y: auto;
+}
+
+.quotes-list li {
+  margin-top: 10px;
+}
+
+.delete-button {
+  margin-right: 10px;
+}
+
+.error-message {
+  margin-top: 10px;
+}
