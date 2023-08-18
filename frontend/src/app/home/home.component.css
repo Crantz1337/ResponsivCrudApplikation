@@ -1,0 +1,30 @@
+.logout-button {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;  /* ensure the button appears above other elements */
+    margin-left: 50px;
+}
+
+.table th, .table td {
+    padding-left: 70px;
+    padding-right: 70px;
+}
+
+.table {
+    display: block;
+    max-height: 300px; 
+    overflow-y: auto;
+}
+
+.btn {
+
+    margin-right: 10px;
+
+}
+
+.container
+{
+    margin-left: 500px;
+    margin-top: 200px;
+}

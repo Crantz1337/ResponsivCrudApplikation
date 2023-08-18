@@ -1,0 +1,20 @@
+.table th, .table td {
+    padding-left: 70px;
+    padding-right: 70px;
+}
+
+.table {
+    display: block;
+    max-height: 300px; 
+    overflow-y: auto;
+}
+
+.submit-button, .alert
+{
+    margin-top: 10px;
+}
+
+.container
+{
+    margin-top: 200px;
+}
