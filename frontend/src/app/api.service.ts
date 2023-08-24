@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { v4 as uuidv4 } from 'uuid';
 import { AuthenticateRequest } from './models/AuthenticateRequest';
 import { AddRequest } from './models/AddRequest';
 import { DeleteRequest } from './models/DeleteRequest';
@@ -32,15 +33,11 @@ export class ApiService {
     return headers;
   }
 
-  generateRandomId(length: number = 10): string {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
-    const charactersLength = characters.length;
-    for (let i = 0; i < length; i++) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-}
+
+  generateRandomId(): string {
+      return uuidv4();
+  }
+
 
   authenticate(model: AuthenticateRequest): Observable<any> {
     return this.http.post(`${this.baseURL}/authenticate`, model);

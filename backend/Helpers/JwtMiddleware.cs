@@ -8,7 +8,7 @@ using WebApi.Services;
 
 public class JwtMiddleware
 {
-    private readonly RequestDelegate _next;
+    private readonly RequestDelegate _next; // Represents the next middleware in the pipeline
     private readonly AppSettings _appSettings;
 
     public JwtMiddleware(RequestDelegate next, IOptions<AppSettings> appSettings)
@@ -17,6 +17,7 @@ public class JwtMiddleware
         _appSettings = appSettings.Value;
     }
 
+    // Invoked for each http request
     public async Task Invoke(HttpContext context, IUserService userService)
     {
         var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
@@ -27,6 +28,7 @@ public class JwtMiddleware
         await _next(context);
     }
 
+    // Attaching the user to the httpcontext allows one to get the user when an endpoint is hit.
     private void attachUserToContext(HttpContext context, IUserService userService, string token)
     {
         try
@@ -39,12 +41,11 @@ public class JwtMiddleware
                 IssuerSigningKey = new SymmetricSecurityKey(key),
                 ValidateIssuer = false,
                 ValidateAudience = false,
-                // set clockskew to zero so tokens expire exactly at token expiration time (instead of 5 minutes later)
                 ClockSkew = TimeSpan.Zero
             }, out SecurityToken validatedToken);
 
             var jwtToken = (JwtSecurityToken)validatedToken;
-			var userId = jwtToken.Claims.First(x => x.Type == "id").Value;
+			var userId = Guid.Parse(jwtToken.Claims.First(x => x.Type == "id").Value);
 
 			// attach user to context on successful jwt validation
 			context.Items["User"] = userService.GetById(userId);

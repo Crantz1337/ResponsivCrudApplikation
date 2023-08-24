@@ -30,7 +30,7 @@ export class LoginComponent {
         localStorage.setItem('token', response.token);
         this.router.navigate(['/home']);
       }, error => {
-        this.errorMessage = 'Invalid credentials, please try again.';
+        this.errorMessage = "Error! Check console for more information";
       });
     }
   }
